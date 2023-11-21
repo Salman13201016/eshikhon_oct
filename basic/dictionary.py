@@ -5,5 +5,3 @@ cars = {"car1":
 for i,j in cars.items():
     for k in j.items():
         print(i,k)
-
-#{key:value}
