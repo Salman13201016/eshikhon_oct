@@ -3,10 +3,16 @@ list_1 = [10,21,33,40,50,50]
 list_2 =["abcd","efgh"]
 sum = 0
 
+as_ci = []
 for i in list_2:
-    sum = sum+len(i)
+    sum = 0
+    for j in i:
+        asci = ord(j)
+        sum = sum+asci
+    # sum = sum+len(i)
+    as_ci.append(asci)
 
-print(sum)
+print(as_ci)
 
 # for i in range(len(list_1)):
 #     print(i,list_1[i])
