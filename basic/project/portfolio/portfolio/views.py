@@ -9,13 +9,13 @@ from django.core.signing import Signer
 
 
 
-def demo(request):
-    title = "This is a demo html"
-    name = "salman"
-    product_name = ['p1','p2','p3']
-    data = {"t":title,'name':name,'prod':product_name}
+def home(request):
+    
+    data = About.objects.first()
+    context_data = {'d':data}
+
     # print("this is root url function")
-    return render(request,'demo/portfolio.html',data)
+    return render(request,'demo/portfolio.html',context_data)
 
 def demo1(request):
     a = 10
@@ -25,7 +25,8 @@ def demo1(request):
     return HttpResponse(c)
 
 def login(request):
-    if 'user_id' in request.session:
+    google_data = request.session.get('social_auth_google-oauth2')
+    if 'user_id' in request.session or google_data:
         return redirect('about')
     else:
 
@@ -47,11 +48,13 @@ def login_admin(request):
         return redirect('login')
 
 def about_index(request):
-    if 'user_id' in request.session:
+    google_data = request.session.get('social_auth_google-oauth2')
+    if 'user_id' in request.session or google_data:
         all_data = About.objects.all()
 
         msg =  messages.get_messages(request)
         print(msg)
+    
 
         data = {'d':all_data,'msg':msg}
         # print("this is root url function")
